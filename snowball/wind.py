@@ -17,7 +17,7 @@ class wind(object):
         self.url = "http://" + front_url + ":8080/wsd"
 
     def wsd(self, codes: Union[str, List[str]], fields: Union[str, List[str]], beginTime: str, endTime: str,
-            options: str):
+            options: str = ""):
         """
         获取日时间序列函数
 
@@ -37,7 +37,7 @@ class wind(object):
         else:
             raise Exception("获取日时间序列函数失败 (%d,%s)" % (response.status_code, json.loads(response.content)))
 
-    def wss(self, codes: Union[str, List[str]], fields: Union[str, List[str]], options: str):
+    def wss(self, codes: Union[str, List[str]], fields: Union[str, List[str]], options: str = ""):
         """
         获取日时间序列函数
 
