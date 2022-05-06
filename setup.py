@@ -7,7 +7,7 @@ import setuptools
 
 setuptools.setup(
     name='snowball',
-    version="0.0.1",
+    version="0.0.2",
     description='SnowBall SDK',
     author='Sparrow',
     long_description="sdk for snowball quant",
