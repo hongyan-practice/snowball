@@ -10,11 +10,10 @@ from typing import Union, List
 
 
 class wind(object):
-    def __init__(self, front_url="150.158.140.29"):
-        self.headers = {
-            'User-Agent': 'snowballsdk/1.0.0'
-        }
-        self.url = "http://" + front_url + ":8080/wsd"
+    def __init__(self, auth, front_url="150.158.140.29"):
+        self.headers = auth._base_headers
+        self.front_url = front_url
+        self.base_url = "http://" + self.front_url + ":8080"
 
     def wsd(self, codes: Union[str, List[str]], fields: Union[str, List[str]], beginTime: str, endTime: str,
             options: str = ""):
@@ -30,7 +29,7 @@ class wind(object):
         payload["beginTime"] = beginTime
         payload["endTime"] = endTime
         payload["options"] = options
-        response = requests.post(url=self.url, headers=self.headers, data=payload, timeout=30)
+        response = requests.post(url= self.base_url + "/wsd", headers=self.headers, data=payload, timeout=30)
         if response.status_code == 200:
             content = json.loads(response.content)
             return content
@@ -48,7 +47,7 @@ class wind(object):
         payload["codes"] = codes
         payload["fields"] = fields
         payload["options"] = options
-        response = requests.post(url="http://" + self.front_url + ":8080/wss", headers=self.headers, data=payload, timeout=30)
+        response = requests.post(url= self.base_url + "/wss", headers=self.headers, data=payload, timeout=30)
         if response.status_code == 200:
             content = json.loads(response.content)
             return content

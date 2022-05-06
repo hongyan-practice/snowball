@@ -3,3 +3,4 @@
 __date__ = '2022/5/2'
 
 from snowball.wind import wind
+from snowball.auth import auth
